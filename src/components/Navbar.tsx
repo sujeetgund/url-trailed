@@ -29,7 +29,7 @@ const getStartedItems = [
     desc: "Create a account to shorten your URLs and use exclusive services.",
   },
   {
-    title: "Short URL",
+    title: "Shorten a URL",
     href: "/shorten",
     desc: "Shorten your URLs with URL Trailed",
   },
@@ -37,7 +37,7 @@ const getStartedItems = [
 
 function Navbar() {
   return (
-    <div className="mt-5 w-full flex justify-between items-center">
+    <nav className="mt-5 w-full sm:w-7xl flex justify-between items-center">
       {/* Logo */}
       <Link href={"/"}>
         <Image
@@ -81,28 +81,41 @@ function Navbar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
+          {/* Pricing */}
+          <NavigationMenuItem>
+            <Link href={"/pricing"} className={navigationMenuTriggerStyle()}>
+              Pricing
+            </Link>
+          </NavigationMenuItem>
+
           {/* Sign Up */}
           <NavigationMenuItem>
-            <Link href={"/register"} className={navigationMenuTriggerStyle()}>
+            <Link href={"/sign-up"} className={navigationMenuTriggerStyle()}>
               Sign Up
+            </Link>
+          </NavigationMenuItem>
+
+          {/* Sign In */}
+          <NavigationMenuItem>
+            <Link href={"/sign-in"} className={navigationMenuTriggerStyle()}>
+              Sign In
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 
       {/* Right Navbar */}
-      {/* <div className="flex justify-between items-center space-x-4"> */}
       <Button variant={"link"} className="text-white bg-green-500">
         <Link
           href={data.github_repo_url}
           className=" flex items-center justify-around space-x-2"
+          target="_blank"
         >
           <span>Contribute on Github</span>
           <AiFillGithub className="h-5 w-5" />
         </Link>
       </Button>
-      {/* </div> */}
-    </div>
+    </nav>
   );
 }
 
