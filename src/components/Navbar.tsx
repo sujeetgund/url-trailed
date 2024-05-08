@@ -37,85 +37,87 @@ const getStartedItems = [
 
 function Navbar() {
   return (
-    <nav className="mt-5 w-full sm:w-7xl flex justify-between items-center">
-      {/* Logo */}
-      <Link href={"/"}>
-        <Image
-          src={"/logo.jpeg"}
-          alt="logo"
-          height={60}
-          width={60}
-          className="rounded-xl shadow-lg"
-        />
-      </Link>
-
-      {/* Center Navbar */}
-      <NavigationMenu>
-        <NavigationMenuList>
-          {/* Get started */}
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Get Started</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
-                {getStartedItems.map(({ title, href, desc }) => (
-                  <li key={title}>
-                    <NavigationMenuLink asChild>
-                      <Link href={href}>
-                        <div
-                          className={
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          }
-                        >
-                          <div className="text-sm font-medium leading-none">
-                            {title}
-                          </div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground text-gray-500">
-                            {desc}
-                          </p>
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          {/* Pricing */}
-          <NavigationMenuItem>
-            <Link href={"/pricing"} className={navigationMenuTriggerStyle()}>
-              Pricing
-            </Link>
-          </NavigationMenuItem>
-
-          {/* Sign Up */}
-          <NavigationMenuItem>
-            <Link href={"/sign-up"} className={navigationMenuTriggerStyle()}>
-              Sign Up
-            </Link>
-          </NavigationMenuItem>
-
-          {/* Sign In */}
-          <NavigationMenuItem>
-            <Link href={"/sign-in"} className={navigationMenuTriggerStyle()}>
-              Sign In
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      {/* Right Navbar */}
-      <Button variant={"link"} className="text-white bg-green-500">
-        <Link
-          href={data.github_repo_url}
-          className=" flex items-center justify-around space-x-2"
-          target="_blank"
-        >
-          <span>Contribute on Github</span>
-          <AiFillGithub className="h-5 w-5" />
+    <div className="fixed w-full bg-white">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <Link href={"/"}>
+          <Image
+            src={"/logo.jpeg"}
+            alt="logo"
+            height={60}
+            width={60}
+            className="rounded-xl shadow-lg my-2"
+          />
         </Link>
-      </Button>
-    </nav>
+
+        {/* Center Navbar */}
+        <NavigationMenu>
+          <NavigationMenuList>
+            {/* Get started */}
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Get Started</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
+                  {getStartedItems.map(({ title, href, desc }) => (
+                    <li key={title}>
+                      <NavigationMenuLink asChild>
+                        <Link href={href}>
+                          <div
+                            className={
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            }
+                          >
+                            <div className="text-sm font-medium leading-none">
+                              {title}
+                            </div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground text-gray-500">
+                              {desc}
+                            </p>
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            {/* Pricing */}
+            <NavigationMenuItem>
+              <Link href={"/pricing"} className={navigationMenuTriggerStyle()}>
+                Pricing
+              </Link>
+            </NavigationMenuItem>
+
+            {/* Sign Up */}
+            <NavigationMenuItem>
+              <Link href={"/sign-up"} className={navigationMenuTriggerStyle()}>
+                Sign Up
+              </Link>
+            </NavigationMenuItem>
+
+            {/* Sign In */}
+            <NavigationMenuItem>
+              <Link href={"/sign-in"} className={navigationMenuTriggerStyle()}>
+                Sign In
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        {/* Right Navbar */}
+        <Button variant={"link"} className="text-white bg-green-500">
+          <Link
+            href={data.github_repo_url}
+            className=" flex items-center justify-around space-x-2"
+            target="_blank"
+          >
+            <span>Contribute on Github</span>
+            <AiFillGithub className="h-5 w-5" />
+          </Link>
+        </Button>
+      </div>
+    </div>
   );
 }
 

@@ -52,20 +52,20 @@ function ShortLinkForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleShortLinkSubmit)}
-        className="w-full space-y-6"
+        className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg"
       >
         <FormField
           control={form.control}
           name="longLink"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-xl font-semibold">
+              <FormLabel className="text-2xl font-semibold">
                 Shorten a long URL
               </FormLabel>
               <FormControl>
                 <Input placeholder="Enter long link here" {...field} />
               </FormControl>
-              <FormDescription>
+              <FormDescription className="italic">
                 This link will be shortened by URL Trailed.
               </FormDescription>
               <FormMessage />
