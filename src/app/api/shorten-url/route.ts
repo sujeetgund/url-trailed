@@ -11,16 +11,22 @@ export async function POST(req: Request) {
   const { originalUrl } = await req.json();
 
   try {
-    // Create short URL
-    const shortUrl = nanoid(13);
+    // Create shortId
+    const shortId = nanoid(13);
 
-    await Url.create({ originalUrl, shortUrl });
+    const url = await Url.create({ originalUrl, shortId });
+
+    if (!url)
+      return Response.json(
+        { success: false, message: "url not created" },
+        { status: 500 }
+      );
 
     return Response.json(
       {
         success: true,
         message: "url created successfully",
-        data: { originalUrl, shortUrl },
+        data: { originalUrl, shortId },
       },
       { status: 200 }
     );

@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface Url extends Document {
   originalUrl: string;
-  shortUrl: string;
+  shortId: string;
   createdAt: Date;
   totalClicks: number;
 }
@@ -13,9 +13,9 @@ const urlSchema: Schema<Url> = new Schema({
     required: [true, "original url is required"],
   },
 
-  shortUrl: {
+  shortId: {
     type: String,
-    required: [true, "short url is required"],
+    required: [true, "shortId is required"],
   },
 
   createdAt: {
