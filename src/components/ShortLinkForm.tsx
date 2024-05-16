@@ -101,6 +101,26 @@ function ShortLinkForm() {
     }
   };
 
+  // Handle Copy Button
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      `${process.env.DOMAIN_NAME || "http://localhost:3000"}/r/${response.shortId}`
+    );
+    toast({
+      title: "Copied",
+      description: "Shortened URL copied to clipboard.",
+    });
+  };
+
+  // Handle Shorten Another Link Button
+  const handleShortenAnotherLink = () => {
+    form.reset();
+    setResponse({
+      originalUrl: "",
+      shortId: "",
+    });
+  };
+
   return (
     <>
       {response.originalUrl && response.shortId ? (
@@ -127,7 +147,7 @@ function ShortLinkForm() {
                 <FormControl>
                   <Input
                     disabled
-                    value={`${process.env.DOMAIN_NAME || "http://localhost:3000"}/r/${response.shortId}`}
+                    value={`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/r/${response.shortId}`}
                   />
                 </FormControl>
               </FormItem>
@@ -144,13 +164,20 @@ function ShortLinkForm() {
             </Button>
 
             {/* Copy link button */}
-            <Button className="flex items-center space-x-2">
+            <Button
+              className="flex items-center space-x-2"
+              onClick={handleCopy}
+            >
               <Copy className="h-4 w-4" />
               <span>Copy</span>
             </Button>
 
             {/* Shorten another link */}
-            <Button variant={"default"} className="w-full">
+            <Button
+              variant={"default"}
+              className="w-full"
+              onClick={handleShortenAnotherLink}
+            >
               Shorten Another Link
             </Button>
           </div>
