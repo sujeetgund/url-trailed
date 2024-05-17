@@ -1,39 +1,47 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
 import ShortLinkForm from "./ShortLinkForm";
 
 function HeroSection() {
   return (
-    <section className="flex flex-col justify-center items-center space-y-24 my-24 w-full">
+    <section className="flex flex-col justify-center items-center my-24 w-full">
       {/* Hero Introduction */}
-      <div className="bg-black w-full">
-        <div className="flex flex-col justify-center items-center max-w-7xl mx-auto m-14">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white mx-2 lg:mx-0">
-            <span className="no-underline md:underline underline-offset-8 decoration-wavy decoration-[#06a8fc]">URL Trailed</span>: The Ultimate Link Shortener
+      <div className="w-full">
+        <div className="flex flex-col justify-center items-center max-w-7xl mx-auto m-14 bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-14 z-10">
+          <Image
+            src={"/logo.jpeg"}
+            height={70}
+            width={70}
+            alt="logo"
+            className="mb-4 rounded-lg"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 mx-2 lg:mx-0 flex flex-col items-center">
+            The Ultimate{" "}
+            <span className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
+              Link Shortener
+            </span>
           </h1>
-          <h3 className="text-lg md:text-xl text-white mb-8 mt-2 italic mx-2 lg:mx-0">
+          <h3 className="text-base md:text-xl mb-8 italic mx-2 lg:mx-0">
             Create, Customize, and Track – Elevate Your Link Sharing Experience.
           </h3>
-          <p className="mb-4 max-w-4xl leading-relaxed text-white/70 mx-2 lg:mx-0">
-            Unlock the power of concise communication with URL Trailed. Say
-            goodbye to long, cumbersome URLs and hello to streamlined links that
-            pack a punch. With us, you can create shorter,
-            more manageable URLs in seconds. Our robust suite of features allows you to customize your
-            links and track their performance with advanced
-            analytics. Elevate your online presence and make every link count
-            with URL Trailed.
+          <p className="mb-4 max-w-2xl leading-relaxed mx-2 lg:mx-0 text-gray-600">
+            URL Trailed is the open-source link management tool. Create,
+            customize, and track links effortlessly. Elevate your marketing game
+            with URL Trailed!
           </p>
           <div className="flex justify-center items-center space-x-3 my-2">
             <Link href={"/pricing"}>
-              <Button variant="outline" size={"lg"} className="text-[#343A40]">
-                View Plans
+              <Button variant="outline" size={"lg"} className="">
+                Get a Demo
               </Button>
             </Link>
 
             <Link href="/sign-up">
               <Button variant="default" size={"lg"}>
-                Create Free Account
+                Start for Free
               </Button>
             </Link>
           </div>

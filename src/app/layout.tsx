@@ -23,9 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className}`}>
         <NextThemesProvider defaultTheme="light">
-          <div className="relative bg-[#F8F9FA]">
+          <div className="relative bg-gradient-to-r from-blue-100 via-yellow-100 to-pink-100">
             <Navbar />
             {children}
             <Toaster />
