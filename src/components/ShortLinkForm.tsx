@@ -74,13 +74,7 @@ function ShortLinkForm() {
       setResponse(response.data?.data);
       toast({
         title: "Success",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(response.data?.data, null, 2)}
-            </code>
-          </pre>
-        ),
+        description: "URL shortened successfully.",
       });
     } catch (error) {
       const axiosErrors = error as AxiosError;
@@ -104,7 +98,7 @@ function ShortLinkForm() {
   // Handle Copy Button
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      `${process.env.DOMAIN_NAME || "http://localhost:3000"}/r/${response.shortId}`
+      `${process.env.NEXT_PUBLIC_DOMAIN_NAME}/r/${response.shortId}`
     );
     toast({
       title: "Copied",
@@ -124,7 +118,7 @@ function ShortLinkForm() {
   return (
     <>
       {response.originalUrl && response.shortId ? (
-        <div className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg">
+        <div className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg bg-white text-[#343A40] rounded-lg">
           <Form {...form}>
             <form className="space-y-4">
               {/* Original URL */}
@@ -164,11 +158,8 @@ function ShortLinkForm() {
             </Button>
 
             {/* Copy link button */}
-            <Button
-              className="flex items-center space-x-2"
-              onClick={handleCopy}
-            >
-              <Copy className="h-4 w-4" />
+            <Button className="" onClick={handleCopy}>
+              <Copy className="h-4 w-4 mr-2" />
               <span>Copy</span>
             </Button>
 
@@ -187,7 +178,7 @@ function ShortLinkForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg"
+              className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg bg-white text-[#343A40] rounded-lg"
             >
               {/* Input Link */}
               <FormField
@@ -200,7 +191,12 @@ function ShortLinkForm() {
                       <span>Shorten a long URL</span>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter long link here" {...field} />
+                      <Input
+                        placeholder="Enter long link here"
+                        className="text-[#343A40]"
+                        autoComplete="false"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription className="italic">
                       This link will be shortened by URL Trailed.

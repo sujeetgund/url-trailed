@@ -4,10 +4,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { AiFillGithub } from "react-icons/ai";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaRegStar } from "react-icons/fa6";
-
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -21,32 +17,39 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { data } from "@/constants";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 const getStartedItems = [
   {
     title: "Create a account",
-    href: "/register",
+    href: "/sign-up",
     desc: "Create a account to shorten your URLs and use exclusive services.",
   },
   {
     title: "Shorten a URL",
-    href: "/shorten",
+    href: "#shorten-form",
     desc: "Shorten your URLs with URL Trailed",
+  },
+  {
+    title: "Pricing",
+    href: "/pricing",
+    desc: "Check out our pricing plans and choose the best one for you.",
   },
 ];
 
 function Navbar() {
   return (
-    <div className="fixed w-full bg-white">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <div className="fixed w-full bg-white  px-2 lg:px-0 text-[#343A40]">
+      <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href={"/"}>
           <Image
             src={"/logo.jpeg"}
             alt="logo"
-            height={60}
-            width={60}
-            className="rounded-xl shadow-lg my-2"
+            height={50}
+            width={50}
+            className="rounded-lg md:rounded-xl shadow-lg my-2 cursor-pointer"
+            priority
           />
         </Link>
 
@@ -55,7 +58,9 @@ function Navbar() {
           <NavigationMenuList>
             {/* Get started */}
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Get Started</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="dark:text-black">
+                Get Started
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
                   {getStartedItems.map(({ title, href, desc }) => (
@@ -83,7 +88,7 @@ function Navbar() {
             </NavigationMenuItem>
 
             {/* Pricing */}
-            <NavigationMenuItem>
+            <NavigationMenuItem className="hidden md:flex">
               <Link href={"/pricing"} className={navigationMenuTriggerStyle()}>
                 Pricing
               </Link>
@@ -106,14 +111,14 @@ function Navbar() {
         </NavigationMenu>
 
         {/* Right Navbar */}
-        <Button variant={"link"} className="text-white bg-green-500">
-          <Link
-            href={data.github_repo_url}
-            className=" flex items-center justify-around space-x-2"
-            target="_blank"
-          >
+        <Button
+          variant={"link"}
+          className="text-white bg-green-500 hidden md:flex"
+          asChild
+        >
+          <Link href={data.github_repo_url} target="_blank">
             <span>Contribute on Github</span>
-            <AiFillGithub className="h-5 w-5" />
+            <GitHubLogoIcon className="h-5 w-5 ml-2" />
           </Link>
         </Button>
       </div>
