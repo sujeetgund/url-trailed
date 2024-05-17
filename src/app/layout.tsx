@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <NextThemesProvider defaultTheme="light">
-          <div className="relative">
+          <div className="relative bg-[#F8F9FA]">
             <Navbar />
             {children}
             <Toaster />
