@@ -1,10 +1,15 @@
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between">
-      <HeroSection />
-    </main>
+    <>
+      <Navbar />
+      <main className="flex flex-col items-center">
+        <HeroSection />
+      </main>
+      <Footer />
+    </>
   );
 }
