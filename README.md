@@ -39,15 +39,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses poppins font from [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load a custom Google Font.
+This project uses Poppins font from [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load a custom Google Font.
 
 This project is TypeScript supported.
 
 
 ## Demo
-![screencapture-url-trailed-vercel-app-2024-05-16-08_52_18](https://github.com/sujeetgund/url-trailed/assets/63530146/ba255f3f-d3b0-4279-9bf8-6cef1156b365)
+![home page](https://github.com/sujeetgund/url-trailed/assets/63530146/6a1ce99e-5f15-4cc5-9cad-45c395b2a0be)
 
-![screencapture-url-trailed-vercel-app-2024-05-16-08_53_09](https://github.com/sujeetgund/url-trailed/assets/63530146/a49ce0c9-5a67-4709-817f-e0717addd770)
+![image](https://github.com/sujeetgund/url-trailed/assets/63530146/28c2a37b-bd44-4265-a9da-6ddf13e314d4)
+
 
 
 
