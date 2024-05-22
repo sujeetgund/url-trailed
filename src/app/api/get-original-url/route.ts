@@ -1,18 +1,17 @@
 import Url from "@/models/Url";
 import { dbConnect } from "@/lib/dbConnect";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   await dbConnect();
 
   try {
     // Get shortId from request
-    const { shortId } = await req.json();
+    const shortId = new URL(req.url).searchParams.get("shortId");
 
     // Find document from data using shortId
     const url = await Url.findOneAndUpdate(
       { shortId },
-      { $inc: { totalClicks: 1 } },
-      { new: true }
+      { $inc: { totalClicks: 1 } }
     );
 
     // If url not found return error response
@@ -27,10 +26,12 @@ export async function POST(req: Request) {
     }
 
     // Return success response
+    console.log("url found successfully");
+
     return Response.json(
       {
         success: true,
-        message: "url created successfully",
+        message: "url found successfully",
         data: url,
       },
       { status: 200 }
