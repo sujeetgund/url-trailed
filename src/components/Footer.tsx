@@ -8,6 +8,8 @@ import {
   LinkedInLogoIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
+import { GITHUB, LINKEDIN, TWITTER } from "@/constants";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -96,15 +98,30 @@ const Footer = () => {
         <div className="col-span-1 my-6 lg:my-0">
           <h3>Social</h3>
           <ul className="text-sm flex items-center space-x-2 mt-3">
-            <li className="text-gray-600 cursor-pointer bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10">
-              <GitHubLogoIcon className="w-6 h-6" />
-            </li>
-            <li className="text-gray-600 cursor-pointer bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10">
-              <TwitterLogoIcon className="w-6 h-6" />
-            </li>
-            <li className="text-gray-600 cursor-pointer bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10">
-              <LinkedInLogoIcon className="w-6 h-6" />
-            </li>
+            <Link href={GITHUB.PROFILE_URL}>
+              <li
+                className="text-gray-600 cursor-pointer  rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10 group shadow-md"
+                title={`${GITHUB.PROFILE_USERNAME} on Github`}
+              >
+                <GitHubLogoIcon className="w-6 h-6 group-hover:text-green-500" />
+              </li>
+            </Link>
+            <Link href={TWITTER.PROFILE_URL}>
+              <li
+                className="text-gray-600 cursor-pointer rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10 group shadow-md"
+                title={`${TWITTER.PROFILE_USERNAME} on X`}
+              >
+                <TwitterLogoIcon className="w-6 h-6 group-hover:text-blue-500" />
+              </li>
+            </Link>
+            <Link href={LINKEDIN.PROFILE_URL}>
+              <li
+                className="text-gray-600 cursor-pointer rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-3 z-10 group shadow-md"
+                title={`${LINKEDIN.PROFILE_USERNAME} on LinkedIn`}
+              >
+                <LinkedInLogoIcon className="w-6 h-6 group-hover:text-blue-700" />
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

@@ -79,15 +79,8 @@ function ShortLinkForm() {
       const axiosErrors = error as AxiosError;
       toast({
         title: "Error",
-        description: (
-          <pre className="mt-1 w-[340px] rounded-md p-1">
-            <code className="text-white">
-              {JSON.stringify(axiosErrors.message, null, 2)}
-            </code>
-          </pre>
-        ),
+        description: axiosErrors.message || "An error occurred.",
         variant: "destructive",
-        duration: 2000,
       });
     } finally {
       setIsSubmitting(false);
@@ -117,7 +110,7 @@ function ShortLinkForm() {
   return (
     <>
       {response.originalUrl && response.shortId ? (
-        <div className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg bg-white text-[#343A40] rounded-lg">
+        <div className="max-w-xl w-full mx-auto space-y-6 border p-4 py-8 sm:p-8 shadow-lg bg-white rounded-none sm:rounded-lg">
           <Form {...form}>
             <form className="space-y-4">
               {/* Original URL */}
@@ -177,7 +170,7 @@ function ShortLinkForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="max-w-xl w-full mx-auto space-y-6 border p-8 shadow-lg bg-white text-[#343A40] rounded-lg"
+              className="max-w-xl w-full mx-auto space-y-6 border p-4 py-8 sm:p-8 shadow-lg bg-white rounded-none sm:rounded-lg"
             >
               {/* Input Link */}
               <FormField

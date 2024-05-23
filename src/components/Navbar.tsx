@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 
-import { data } from "@/constants";
+import { GITHUB } from "@/constants";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 const getStartedItems = [
@@ -126,7 +126,7 @@ function Navbar() {
           className="text-white bg-green-500 hidden md:flex"
           asChild
         >
-          <Link href={data.github_repo_url} target="_blank">
+          <Link href={GITHUB.REPO_URL} target="_blank">
             <span>Contribute on Github</span>
             <GitHubLogoIcon className="h-5 w-5 ml-2" />
           </Link>

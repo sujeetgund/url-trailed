@@ -10,7 +10,7 @@ function HeroSection() {
     <section className="flex flex-col justify-center items-center my-24 w-full">
       {/* Hero Introduction */}
       <div className="w-full">
-        <div className="flex flex-col justify-center items-center max-w-7xl mx-auto m-14 bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 p-14 z-10">
+        <div className="flex flex-col justify-center items-center max-w-7xl mx-auto m-14 bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 py-14 px-2 z-10">
           <Image
             src={"/logo.jpeg"}
             height={70}
