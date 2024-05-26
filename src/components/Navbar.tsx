@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+// Shadcn Imports
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -19,10 +20,13 @@ import { Button } from "@/components/ui/button";
 import { GITHUB } from "@/constants";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
+// Kinde Auth Imports
 import {
   RegisterLink,
   LoginLink,
+  LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const getStartedItems = [
   {
@@ -43,6 +47,7 @@ const getStartedItems = [
 ];
 
 function Navbar() {
+  const { user, isLoading, isAuthenticated } = useKindeBrowserClient();
   return (
     <div className="fixed w-full  px-2 lg:px-0 text-[#343A40] border-b border-black/10 bg-white/60 backdrop-blur-lg dark:border-white/10 dark:bg-black/75 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
@@ -102,23 +107,79 @@ function Navbar() {
                 </Link>
               </NavigationMenuItem>
 
-              {/* Sign Up */}
-              <NavigationMenuItem>
-                <RegisterLink
-                  className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
-                >
-                  Sign Up
-                </RegisterLink>
-              </NavigationMenuItem>
+              {isAuthenticated && user ? (
+                <>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent">
+                      Account
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href={"/account"}
+                              className="text-sm font-medium leading-none"
+                            >
+                              <div className="flex flex-col items-start space-y-1">
+                                <span className="font-medium text-gray-400 text-xs">
+                                  Logged In as
+                                </span>
+                                <span>
+                                  {user.given_name} {user.family_name}
+                                </span>
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href={"/dashboard"}
+                              className="text-sm font-medium leading-none"
+                            >
+                              Dashboard
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <LogoutLink className="text-sm font-medium leading-none">
+                              Log Out
+                            </LogoutLink>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </>
+              ) : (
+                <>
+                  {/* Sign Up */}
+                  <NavigationMenuItem>
+                    <RegisterLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent"
+                      )}
+                    >
+                      Sign Up
+                    </RegisterLink>
+                  </NavigationMenuItem>
 
-              {/* Sign In */}
-              <NavigationMenuItem>
-                <LoginLink
-                  className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
-                >
-                  Sign In
-                </LoginLink>
-              </NavigationMenuItem>
+                  {/* Sign In */}
+                  <NavigationMenuItem>
+                    <LoginLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent"
+                      )}
+                    >
+                      Sign In
+                    </LoginLink>
+                  </NavigationMenuItem>
+                </>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
