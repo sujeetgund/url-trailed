@@ -19,6 +19,11 @@ import { Button } from "@/components/ui/button";
 import { GITHUB } from "@/constants";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+
 const getStartedItems = [
   {
     title: "Create a account",
@@ -99,22 +104,20 @@ function Navbar() {
 
               {/* Sign Up */}
               <NavigationMenuItem>
-                <Link
-                  href={"/sign-up"}
+                <RegisterLink
                   className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
                 >
                   Sign Up
-                </Link>
+                </RegisterLink>
               </NavigationMenuItem>
 
               {/* Sign In */}
               <NavigationMenuItem>
-                <Link
-                  href={"/sign-in"}
+                <LoginLink
                   className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
                 >
                   Sign In
-                </Link>
+                </LoginLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
