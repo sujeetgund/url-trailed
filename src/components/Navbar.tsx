@@ -11,193 +11,58 @@ import {
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  NavigationMenuList
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 
 import { GITHUB } from "@/constants";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
-// Kinde Auth Imports
-import {
-  RegisterLink,
-  LoginLink,
-  LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { KindeIdToken } from "@kinde-oss/kinde-auth-nextjs/types";
-
-const getStartedItems = [
+const NavbarItems = [
   {
-    title: "Create a account",
+    title: "Create Account",
     href: "/sign-up",
     desc: "Create a account to shorten your URLs and use exclusive services.",
   },
   {
-    title: "Shorten a URL",
+    title: "Shorten URL",
     href: "#shorten-form",
     desc: "Shorten your URLs with URL Trailed",
-  },
-  {
-    title: "Pricing",
-    href: "/pricing",
-    desc: "Check out our pricing plans and choose the best one for you.",
-  },
+  }
 ];
 
-interface IdToken extends KindeIdToken {
-  preferred_username: string;
-}
-
 function Navbar() {
-  const { user, isLoading, isAuthenticated, getIdToken } =
-    useKindeBrowserClient();
-
-  const user_id_token = getIdToken() as IdToken;
-  console.log("Username: ", user_id_token?.preferred_username);
-
-  console.log(user);
   return (
-    <div className="fixed w-full  px-2 lg:px-0 text-[#343A40] border-b border-black/10 bg-white/60 backdrop-blur-lg dark:border-white/10 dark:bg-black/75 z-50">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
+    <div className="fixed w-full px-2 lg:px-0 backdrop-blur-lg dark:bg-black/75 z-50">
+      <div className="max-w-5xl mx-auto flex justify-between items-center">
         <div className="flex justify-start items-center space-x-8">
           {/* Logo */}
           <Link href={"/"}>
             <Image
               src={"/logo.jpeg"}
               alt="logo"
-              height={50}
-              width={50}
+              height={48}
+              width={48}
               className="rounded-lg md:rounded-xl shadow-lg my-2 cursor-pointer"
               priority
             />
           </Link>
           {/* Menu Buttons */}
           <NavigationMenu>
-            <NavigationMenuList>
-              {/* Get started */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent">
-                  Get Started
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
-                    {getStartedItems.map(({ title, href, desc }) => (
-                      <li key={title}>
-                        <NavigationMenuLink asChild>
-                          <Link href={href}>
-                            <div
-                              className={
-                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                              }
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                {title}
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground text-gray-500">
-                                {desc}
-                              </p>
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Pricing */}
-              <NavigationMenuItem className="hidden md:flex">
-                <Link
-                  href={"/pricing"}
-                  className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
-                >
-                  Pricing
-                </Link>
-              </NavigationMenuItem>
-
-              {isLoading ? (
-                <></>
-              ) : (
-                <>
-                  {isAuthenticated && user ? (
-                    <>
-                      <NavigationMenuItem>
-                        <NavigationMenuTrigger className="bg-transparent">
-                          Account
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <ul className="grid w-[200px] gap-3 p-4 md:w-[250px] md:grid-cols-1 lg:w-[300px] ">
-                            <li>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={"/account"}
-                                  className="text-sm font-medium leading-none"
-                                >
-                                  <div className="flex flex-col items-start space-y-1">
-                                    <span className="font-medium text-gray-400 text-xs">
-                                      Logged In as
-                                    </span>
-                                    <span>
-                                      {user_id_token?.preferred_username ||
-                                        `${user.given_name} ${user.family_name}`}
-                                    </span>
-                                  </div>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                            <li>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={"/dashboard"}
-                                  className="text-sm font-medium leading-none"
-                                >
-                                  Dashboard
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                            <li>
-                              <NavigationMenuLink asChild>
-                                <LogoutLink className="text-sm font-medium leading-none">
-                                  Log Out
-                                </LogoutLink>
-                              </NavigationMenuLink>
-                            </li>
-                          </ul>
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    </>
-                  ) : (
-                    <>
-                      {/* Sign Up */}
-                      <NavigationMenuItem>
-                        <RegisterLink
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            "bg-transparent"
-                          )}
-                        >
-                          Sign Up
-                        </RegisterLink>
-                      </NavigationMenuItem>
-
-                      {/* Sign In */}
-                      <NavigationMenuItem>
-                        <LoginLink
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            "bg-transparent"
-                          )}
-                        >
-                          Sign In
-                        </LoginLink>
-                      </NavigationMenuItem>
-                    </>
-                  )}
-                </>
-              )}
+            <NavigationMenuList className="flex space-x-4">
+              {NavbarItems.map((item) => {
+                return (
+                  <NavigationMenuItem
+                    key={item.title}
+                    className="hidden md:flex hover:bg-gray-100 dark:hover:bg-gray-800/50 rounded-lg p-2"
+                  >
+                    <NavigationMenuLink href={item.href}>
+                      {item.title}
+                    </NavigationMenuLink>
+                    <NavigationMenuContent>{item.desc}</NavigationMenuContent>
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -205,11 +70,11 @@ function Navbar() {
         {/* Right Navbar */}
         <Button
           variant={"link"}
-          className="text-white bg-green-500 hidden md:flex"
+          className="bg-green-500 hidden md:flex"
           asChild
         >
           <Link href={GITHUB.REPO_URL} target="_blank">
-            <span>Contribute on Github</span>
+            <span>Give Star on Github</span>
             <GitHubLogoIcon className="h-5 w-5 ml-2" />
           </Link>
         </Button>

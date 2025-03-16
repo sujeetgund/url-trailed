@@ -1,55 +1,75 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import ShortLinkForm from "./ShortLinkForm";
 
 function HeroSection() {
   return (
-    <section className="flex flex-col justify-center items-center my-24 w-full">
-      {/* Hero Introduction */}
-      <div className="w-full">
-        <div className="flex flex-col justify-center items-center max-w-7xl mx-auto m-14 bg-white-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-white/40 border border-gray-200 py-14 px-2 z-10">
-          <Image
-            src={"/logo.jpeg"}
-            height={70}
-            width={70}
-            alt="logo"
-            className="mb-4 rounded-lg"
-          />
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 mx-2 lg:mx-0 flex flex-col items-center">
-            The Ultimate{" "}
-            <span className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
-              Link Shortener
-            </span>
-          </h1>
-          <h3 className="text-base md:text-xl mb-8 italic mx-2 lg:mx-0">
-            Create, Customize, and Track – Elevate Your Link Sharing Experience.
-          </h3>
-          <p className="mb-4 max-w-2xl leading-relaxed mx-2 lg:mx-0 text-gray-600">
-            URL Trailed is the open-source link management tool. Create,
-            customize, and track links effortlessly. Elevate your marketing game
-            with URL Trailed!
-          </p>
-          <div className="flex justify-center items-center space-x-3 my-2">
-            <Link href={"/pricing"}>
-              <Button variant="outline" size={"lg"} className="">
-                Get a Demo
-              </Button>
-            </Link>
+    <section className="relative py-20 md:py-32 overflow-hidden">
+      <div className="container px-4 md:px-6 mx-auto max-w-5xl">
+        <div className="flex flex-col items-center text-center space-y-8">
+          {/* Logo */}
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/30 to-orange-600/30 rounded-full blur-md" />
+            <Image
+              src="/logo.jpeg"
+              height={80}
+              width={80}
+              alt="URL Trailed logo"
+              className="relative rounded-xl shadow-lg"
+            />
+          </div>
 
-            <Link href="/sign-up">
-              <Button variant="default" size={"lg"}>
-                Start for Free
-              </Button>
-            </Link>
+          {/* Hero content */}
+          <div className="space-y-6 max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              The Ultimate{" "}
+              <span className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
+                Link Shortener
+              </span>
+            </h1>
+
+            <p className="text-lg md:text-xl font-medium text-muted-foreground">
+              Create, Customize, and Track – Elevate Your Link Sharing
+              Experience.
+            </p>
+
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+              URL Trailed is the open-source link management tool. Create,
+              customize, and track links effortlessly. Elevate your marketing
+              game with URL Trailed!
+            </p>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
+              <Link href="/sign-up">
+                <Button size="lg" className="w-full sm:w-auto font-medium">
+                  Start for Free
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+
+              <Link href="/pricing">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto font-medium"
+                >
+                  Get a Demo
+                  <Sparkles className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Form */}
-      <ShortLinkForm />
+        {/* Form section with card styling */}
+        <div className="relative mt-16 bg-card rounded-lg shadow-lg" id="shorten-form">
+          <ShortLinkForm />
+        </div>
+      </div>
     </section>
   );
 }

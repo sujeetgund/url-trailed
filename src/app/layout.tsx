@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
@@ -24,13 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <NextThemesProvider defaultTheme="light">
-          <div className="bg-gradient-to-r from-blue-100 via-yellow-100 to-pink-100">
-            
-            {children}
-            <Toaster />
-          </div>
-        </NextThemesProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-amber-500/10 via-orange-600/10 to-yellow-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-r from-amber-500/5 to-orange-600/5 rounded-full blur-3xl" />
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

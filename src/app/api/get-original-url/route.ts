@@ -1,12 +1,12 @@
 import Url from "@/models/Url";
 import { dbConnect } from "@/lib/dbConnect";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   await dbConnect();
 
   try {
     // Get shortId from request
-    const shortId = new URL(req.url).searchParams.get("shortId");
+    const { shortId } = await req.json();
 
     // Find document from data using shortId
     const url = await Url.findOneAndUpdate(
@@ -32,7 +32,7 @@ export async function GET(req: Request) {
       {
         success: true,
         message: "url found successfully",
-        data: url,
+        url: url.originalUrl,
       },
       { status: 200 }
     );

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
   try {
     // Create shortId
-    const shortId = nanoid(13);
+    const shortId = nanoid(10);
 
     const url = await Url.create({ originalUrl, shortId });
 
@@ -26,7 +26,8 @@ export async function POST(req: Request) {
       {
         success: true,
         message: "url created successfully",
-        data: { originalUrl, shortId },
+        originalUrl,
+        shortId,
       },
       { status: 200 }
     );

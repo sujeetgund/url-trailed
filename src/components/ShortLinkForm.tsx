@@ -29,6 +29,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { handleCopy } from "@/lib/utils";
+import { handleSubmit } from "@/app/actions";
 
 // Zod Schema for Validation
 const FormSchema = z.object({
@@ -43,13 +45,15 @@ type FormFields = z.infer<typeof FormSchema>;
 
 function ShortLinkForm() {
   // React States
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [response, setResponse] = useState<{
-    originalUrl: string;
-    shortId: string;
+    originalUrl: string | undefined;
+    shortId: string | undefined;
+    message?: string | undefined;
   }>({
-    originalUrl: "",
-    shortId: "",
+    originalUrl: undefined,
+    shortId: undefined,
+    message: undefined,
   });
 
   // Hook Form
@@ -62,39 +66,40 @@ function ShortLinkForm() {
 
   // Handle Submit
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // Reset Response
     setResponse({
       originalUrl: "",
       shortId: "",
+      message: "",
     });
     setIsSubmitting(true);
 
-    try {
-      const response = await axios.post("/api/shorten-url", data);
-      setResponse(response.data?.data);
-      toast({
-        title: "Success",
-        description: "URL shortened successfully.",
-      });
-    } catch (error) {
-      const axiosErrors = error as AxiosError;
+    // Handle Submit
+    const response = await handleSubmit(data);
+
+    // Handle Error
+    if (response.success === false) {
       toast({
         title: "Error",
-        description: axiosErrors.message || "An error occurred.",
+        description: response.message,
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
 
-  // Handle Copy Button
-  const handleCopy = () => {
-    navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_DOMAIN_NAME}/r/${response.shortId}`
-    );
+    // Set Response
+    setResponse({
+      originalUrl: response.originalUrl,
+      shortId: response.shortId,
+      message: response.message,
+    });
+
+    // Reset Form
+    setIsSubmitting(false);
+
+    // Show Success Toast
     toast({
-      title: "Copied",
-      description: "Shortened URL copied to clipboard.",
+      title: "Success",
+      description: "URL shortened successfully.",
     });
   };
 
@@ -110,12 +115,12 @@ function ShortLinkForm() {
   return (
     <>
       {response.originalUrl && response.shortId ? (
-        <div className="max-w-xl w-full mx-auto space-y-6 border p-4 py-8 sm:p-8 shadow-lg bg-white rounded-none sm:rounded-lg">
+        <div className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-md backdrop:blur-sm bg-transparent/10 rounded-none sm:rounded-lg">
           <Form {...form}>
             <form className="space-y-4">
               {/* Original URL */}
               <FormItem>
-                <FormLabel className="text-lg font-semibold flex items-center space-x-1">
+                <FormLabel className="text-lg font-semibold flex items-center gap-2">
                   <Link2 className="font-extrabold" />
                   <span>Your long URL</span>
                 </FormLabel>
@@ -126,7 +131,7 @@ function ShortLinkForm() {
 
               {/* Shortened URL */}
               <FormItem>
-                <FormLabel className="text-lg font-semibold flex items-center space-x-1">
+                <FormLabel className="text-lg font-semibold flex items-center gap-2">
                   <Wand className="font-extrabold" />
                   <span>URL Trailed</span>
                 </FormLabel>
@@ -150,7 +155,14 @@ function ShortLinkForm() {
             </Button>
 
             {/* Copy link button */}
-            <Button className="" onClick={handleCopy}>
+            <Button
+              className=""
+              onClick={() => {
+                handleCopy(
+                  `${process.env.NEXT_PUBLIC_DOMAIN_NAME}/r/${response.shortId}`
+                );
+              }}
+            >
               <Copy className="h-4 w-4 mr-2" />
               <span>Copy</span>
             </Button>
@@ -170,7 +182,7 @@ function ShortLinkForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="max-w-xl w-full mx-auto space-y-6 border p-4 py-8 sm:p-8 shadow-lg bg-white rounded-none sm:rounded-lg"
+              className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-md backdrop:blur-sm bg-transparent/10 rounded-none sm:rounded-lg"
             >
               {/* Input Link */}
               <FormField
@@ -178,14 +190,13 @@ function ShortLinkForm() {
                 name="originalUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-semibold flex items-center space-x-1">
+                    <FormLabel className="text-lg font-semibold flex items-center gap-2">
                       <Link2 className="font-extrabold" />
                       <span>Shorten a long URL</span>
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter long link here"
-                        className="text-[#343A40]"
                         autoComplete="false"
                         {...field}
                       />
@@ -200,7 +211,7 @@ function ShortLinkForm() {
               {/* Submit Button */}
               <Button type="submit" disabled={isSubmitting} className="w-full">
                 {isSubmitting ? (
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2">
                     <LoaderCircle className="animate-spin" />
                     <span>Loading...</span>
                   </div>
