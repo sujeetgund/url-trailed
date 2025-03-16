@@ -33,7 +33,7 @@ const NavbarItems = [
 
 function Navbar() {
   return (
-    <div className="fixed w-full px-2 lg:px-0 backdrop-blur-lg dark:bg-black/75 z-50">
+    <div className="fixed w-full px-2 lg:px-0 backdrop-blur-lg dark:bg-black/75 z-50 hidden md:block">
       <div className="max-w-5xl mx-auto flex justify-between items-center">
         <div className="flex justify-start items-center space-x-8">
           {/* Logo */}

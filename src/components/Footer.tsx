@@ -5,7 +5,7 @@ import AuthorName from "./AuthorName";
 
 const Footer = () => {
   return (
-    <section className="max-w-5xl mx-auto backdrop-filter backdrop-blur-lg py-7 z-10">
+    <section className="max-w-5xl mx-auto backdrop-filter backdrop-blur-lg py-7 z-10 hidden md:block">
       <div className="flex justify-between items-end">
         {/* Author Name and MIT License */}
         <p className="inline-flex">
