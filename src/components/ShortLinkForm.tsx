@@ -115,9 +115,9 @@ function ShortLinkForm() {
   return (
     <>
       {response.originalUrl && response.shortId ? (
-        <div className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-md backdrop:blur-sm bg-transparent/10 rounded-none sm:rounded-lg">
+        <div className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-sm backdrop:blur-sm bg-transparent/5 dark:bg-transparent/20 rounded-lg">
           <Form {...form}>
-            <form className="space-y-4">
+            <form className="">
               {/* Original URL */}
               <FormItem>
                 <FormLabel className="text-lg font-semibold flex items-center gap-2">
@@ -182,7 +182,7 @@ function ShortLinkForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-md backdrop:blur-sm bg-transparent/10 rounded-none sm:rounded-lg"
+              className="max-w-5xl mx-auto space-y-6 p-4 py-8 sm:p-8 shadow-sm backdrop:blur-sm bg-transparent/5 dark:bg-transparent/20 rounded-lg"
             >
               {/* Input Link */}
               <FormField
@@ -197,6 +197,7 @@ function ShortLinkForm() {
                     <FormControl>
                       <Input
                         placeholder="Enter long link here"
+                        className="border border-gray-400"
                         autoComplete="false"
                         {...field}
                       />

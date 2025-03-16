@@ -29,8 +29,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-amber-500/10 via-orange-600/10 to-yellow-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-r from-amber-500/5 to-orange-600/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-r from-amber-500/10 via-orange-600/10 to-yellow-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-r from-amber-500/5 to-orange-600/5 rounded-full blur-3xl" />
           {children}
           <Toaster />
         </ThemeProvider>

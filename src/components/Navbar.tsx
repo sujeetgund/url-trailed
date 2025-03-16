@@ -11,12 +11,13 @@ import {
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList
+  NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 
 import { GITHUB } from "@/constants";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { ModeToggle } from "./mode-toggle";
 
 const NavbarItems = [
   {
@@ -28,13 +29,14 @@ const NavbarItems = [
     title: "Shorten URL",
     href: "#shorten-form",
     desc: "Shorten your URLs with URL Trailed",
-  }
+  },
 ];
 
 function Navbar() {
   return (
-    <div className="fixed w-full px-2 lg:px-0 backdrop-blur-lg dark:bg-black/75 z-50 hidden md:block">
+    <div className="fixed w-full px-2 lg:px-0 backdrop-blur-lg dark:bg-black/75 z-50">
       <div className="max-w-5xl mx-auto flex justify-between items-center">
+        {/* Left Navbar */}
         <div className="flex justify-start items-center space-x-8">
           {/* Logo */}
           <Link href={"/"}>
@@ -49,7 +51,7 @@ function Navbar() {
           </Link>
           {/* Menu Buttons */}
           <NavigationMenu>
-            <NavigationMenuList className="flex space-x-4">
+            <NavigationMenuList className="space-x-4 hidden md:flex">
               {NavbarItems.map((item) => {
                 return (
                   <NavigationMenuItem
@@ -68,16 +70,15 @@ function Navbar() {
         </div>
 
         {/* Right Navbar */}
-        <Button
-          variant={"link"}
-          className="bg-green-500 hidden md:flex"
-          asChild
-        >
-          <Link href={GITHUB.REPO_URL} target="_blank">
-            <span>Give Star on Github</span>
-            <GitHubLogoIcon className="h-5 w-5 ml-2" />
-          </Link>
-        </Button>
+        <div className="inline-flex items-center gap-2">
+          <ModeToggle />
+
+          <Button size={"icon"} variant={"outline"}>
+            <a href={GITHUB.REPO_URL} target="_blank" rel="noopener noreferrer">
+              <GitHubLogoIcon className="h-4 w-4" />
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -31,42 +31,32 @@ function HeroSection() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl font-medium text-muted-foreground">
+            <p className="text-lg md:text-xl italic text-muted-foreground">
               Create, Customize, and Track – Elevate Your Link Sharing
               Experience.
             </p>
 
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground hidden sm:block">
               URL Trailed is the open-source link management tool. Create,
               customize, and track links effortlessly. Elevate your marketing
               game with URL Trailed!
             </p>
 
             {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
-              <Link href="/sign-up">
-                <Button size="lg" className="w-full sm:w-auto font-medium">
-                  Start for Free
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-
-              <Link href="/pricing">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto font-medium"
-                >
-                  Get a Demo
-                  <Sparkles className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+            <Link href="/sign-up">
+              <Button size="lg" className="w-auto sm:w-1/2 font-medium mt-3">
+                Start for Free
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
 
         {/* Form section with card styling */}
-        <div className="relative mt-16 bg-card rounded-lg shadow-lg" id="shorten-form">
+        <div
+          className="relative mt-16 bg-card rounded-lg shadow-lg"
+          id="shorten-form"
+        >
           <ShortLinkForm />
         </div>
       </div>
